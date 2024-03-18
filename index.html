@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Books blog - React exercise</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel"> 
+        const colors = {
+            base: '#fff'
+        }
+
+        const Header = () => {
+            const styles = {
+                
+            }
+
+            return (
+                <header style={styles}>
+                    Rincón de lectura
+                </header>
+            )
+        }
+
+
+        const Footer = () => {
+            const styles = {
+                
+            }
+            return (
+                <footer style={styles}>
+                Copyright 2024 UVG
+                </footer>
+            )
+        }
+
+        const MenuContent = ({book_title, genre}) => {
+            const styles = {
+                
+            }
+            return (
+                <li style={styles}>
+                    <h3>{book_title}</h3>
+                    <p>Género: {genre}</p>
+                </li>
+            )
+        }
+
+        const Post = ({ id, book_title, author, genre, sinopsis, comments }) => {
+            const styles = {
+                listStyleType: 'none',
+                backgroundColor: colors.base,
+                padding: '10px',
+                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                marginBottom: '20px',
+            }
+            return (
+                <li style={styles}>
+                <h1>{book_title}</h1>
+                <h3>Autor: {author}</h3>
+                <p>Sinópsis: {sinopsis}</p>
+                <p>Comentario: {comments}</p>
+                </li>
+            )
+        }
+
+        const Content = () => {
+            //STYLES
+            const styles = {
+                display: 'flex',
+                width: '98%',
+            }
+
+            const MenuStyles = {
+                
+            }
+
+            const OnlyPostStyles = {
+                
+            }
+
+            //FETCH CONTENT
+            const [ posts, setPosts ] = React.useState([])
+
+            const getPosts = async () => {
+                const apiResponse = await fetch('https://api.tiburoncin.lat/22787/posts')
+                const jsonPosts = await apiResponse.json()
+                setPosts(jsonPosts)
+            }
+        
+            React.useEffect(() => {
+                getPosts()
+            }, [])
+
+            //WAITING LOGIC
+            if (posts.length === 0) {
+                return <div>Loading...</div>
+            }
+        
+            //VISUALIZE
+            return (
+                <div style={styles}>
+
+                    <ul style={MenuStyles}>
+                        <h2>Contenido del blog:</h2>
+                        {posts.map(({ id, book_title, genre}) => (
+                            <MenuContent key={id} book_title={book_title} genre={genre}/>
+                        ))}
+                    </ul>
+
+                    <ul style={OnlyPostStyles}>
+                        {posts.map(({ id, book_title, author, genre, sinopsis, comments }) => (
+                            <Post key={id} id={id} book_title={book_title} author={author} genre={genre} sinopsis={sinopsis} comments={comments} />
+                        ))}   
+                    </ul>
+
+                </div>
+            )
+        }
+
+        const App = () => {
+            const styles = {
+                
+            }
+
+            return (
+                <main style={styles}>
+                    <Header />
+                    <Content />
+                    <Footer />
+                </main>
+            )
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'))
+        root.render(<App />)
+    </script>
+</body>
+</html>
