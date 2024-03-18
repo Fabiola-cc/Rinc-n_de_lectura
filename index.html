@@ -16,7 +16,18 @@
 
         const Header = () => {
             const styles = {
-                
+                display: 'flex',
+                backgroundColor: colors.base,
+                height: '10vh',
+                width: '98%',
+                fontWeight: 'bold',
+                fontSize: '60px',
+                fontFamily: 'Palatino',
+                borderRadius: '10px',
+                padding: '10px',
+                alignItems: 'center',
+                justifyContent: 'center',
+                textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
             }
 
             return (
@@ -29,7 +40,17 @@
 
         const Footer = () => {
             const styles = {
-                
+                display: 'flex',
+                backgroundColor: colors.base,
+                height: '5vh',
+                width: '98%',
+                fontWeight: '900',
+                fontSize: '10px',
+                fontFamily: 'Lato, sans-serif',
+                borderRadius: '8px',
+                padding: '10px',
+                alignItems: 'center',
+                justifyContent: 'center',
             }
             return (
                 <footer style={styles}>
@@ -40,7 +61,11 @@
 
         const MenuContent = ({book_title, genre}) => {
             const styles = {
-                
+                backgroundColor: colors.base,
+                fontFamily: 'Baskerville',
+                listStyle: 'none',
+                fontSize: '12px',
+                textAlign: 'left',
             }
             return (
                 <li style={styles}>
@@ -57,6 +82,7 @@
                 padding: '10px',
                 boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
                 marginBottom: '20px',
+                borderRadius: '5px',
             }
             return (
                 <li style={styles}>
@@ -76,11 +102,16 @@
             }
 
             const MenuStyles = {
-                
+                width: '25vw',
+                backgroundColor: colors.base,
+                padding: '10px',
+                textAlign: 'center',
             }
 
             const OnlyPostStyles = {
-                
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+                gap: '15px',
             }
 
             //FETCH CONTENT
@@ -124,7 +155,14 @@
 
         const App = () => {
             const styles = {
-                
+                width: '80vw',
+                margin: '0 auto',
+                display: 'flex',
+                padding: '5px',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
             }
 
             return (
