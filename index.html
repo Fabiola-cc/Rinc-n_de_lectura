@@ -12,7 +12,8 @@
     <div id="root"></div>
     <script type="text/babel"> 
         const colors = {
-            base: '#fff'
+            base: '#966D5B',
+            dark: '#32191D',
         }
 
         const Header = () => {
@@ -28,7 +29,8 @@
                 padding: '10px',
                 alignItems: 'center',
                 justifyContent: 'center',
-                textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
+                textShadow: '2px 2px 4px rgba(100, 20, 20, 0.5)',
+                color: colors.dark,
             }
 
             return (
@@ -90,6 +92,7 @@
                 boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
                 marginBottom: '20px',
                 borderRadius: '5px',
+                textAlign: 'justify',
             }
             return (
                 <li style={styles}>
@@ -134,20 +137,56 @@
 
             //FETCH CONTENT
             const [posts, setPosts] = React.useState([])
+            const [error, setError] = React.useState(null)
 
             const getPosts = async () => {
-                const apiResponse = await fetch('https://api.tiburoncin.lat/22787/posts')
-                const jsonPosts = await apiResponse.json()
-                setPosts(jsonPosts)
+                try {
+                    const apiResponse = await fetch('https://api.tiburoncin.lat/22787/posts')
+                    if (!apiResponse.ok) {
+                        throw new Error('Error al cargar los datos del API')
+                    }
+                    const jsonPosts = await apiResponse.json()
+                    setPosts(jsonPosts)
+                } catch (error) {
+                    console.error('Error al cargar los datos del API:', error.message)
+                    setError('Error al cargar los datos del API. Por favor, inténtalo de nuevo más tarde.')
+                }
             }
+
 
             React.useEffect(() => {
                 getPosts()
             }, [])
 
+            //ERROR CATCH
+            if (error) {
+                const styles = {
+                    height: '32px',
+                    width: '768px',
+                    borderRadius: '10px',
+                    backgroundColor: '#7D1F23',
+                    color: '#fff',
+                    textAlign: 'center',
+                    padding: '2px',
+                    margin: '200px'
+                }
+
+                return (
+                    <div>
+                        {error && <div style={styles}>{error}</div>}
+                    </div>
+                )
+            }
+
             //WAITING LOGIC
             if (posts.length === 0) {
-                return <div>Loading...</div>
+                const Imagestyles = {
+                    height: '70vh',
+                    width: '70vw',
+                    borderRadius: '10px',
+                    padding: '10px',
+                }
+                return <img src="./img/loading.gif" alt="loadig" style={Imagestyles}/>
             }
 
             //VISUALIZE
