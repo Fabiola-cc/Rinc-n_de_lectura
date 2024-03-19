@@ -6,12 +6,11 @@
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/prop-types@15/umd/prop-types.development.js"></script>
 </head>
 <body>
     <div id="root"></div>
     <script type="text/babel"> 
-        import PropTypes from 'prop-types'
-
         const colors = {
             base: '#fff'
         }
@@ -76,9 +75,11 @@
             )
         }
 
-        MenuContent.propTypes = {
-            book_title: PropTypes.string.isRequired,
-            genre: PropTypes.string.isRequired,
+        if (typeof PropTypes !== 'undefined') {
+            MenuContent.propTypes = {
+                book_title: PropTypes.string.isRequired,
+                genre: PropTypes.string.isRequired,
+            }
         }
 
         const Post = ({ id, book_title, author, genre, sinopsis, comments }) => {
@@ -100,13 +101,15 @@
             )
         }
 
-        Post.propTypes = {
-            id: PropTypes.number.isRequired,
-            book_title: PropTypes.string.isRequired,
-            author: PropTypes.string.isRequired,
-            genre: PropTypes.string.isRequired,
-            sinopsis: PropTypes.string.isRequired,
-            comments: PropTypes.string.isRequired,
+        if (typeof PropTypes !== 'undefined') {
+            Post.propTypes = {
+                id: PropTypes.number.isRequired,
+                book_title: PropTypes.string.isRequired,
+                author: PropTypes.string.isRequired,
+                genre: PropTypes.string.isRequired,
+                sinopsis: PropTypes.string.isRequired,
+                comments: PropTypes.string.isRequired,
+            }
         }
 
         const Content = () => {
@@ -176,6 +179,7 @@
                 alignItems: 'center',
                 justifyContent: 'center',
                 boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                backgroundColor: 'rgba(255, 215, 215, 0.5)'
             }
 
             return (
@@ -187,6 +191,11 @@
             )
         }
         
+        document.body.style.backgroundImage = "url('./img/library_wp.jpg')"
+        document.body.style.backgroundSize = 'cover'
+        document.body.style.backgroundRepeat = 'no-repeat'
+        document.body.style.backgroundPosition = 'center'
+
         const root = ReactDOM.createRoot(document.getElementById('root'))
         root.render(<App />)
 
