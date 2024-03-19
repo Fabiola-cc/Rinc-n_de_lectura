@@ -14,6 +14,9 @@
         const colors = {
             base: '#966D5B',
             dark: '#32191D',
+            beige: '#D8BA9E',
+            redish: '#6E262E',
+            blueish: '#505764'
         }
 
         const Header = () => {
@@ -43,7 +46,7 @@
         const Footer = () => {
             const styles = {
                 display: 'flex',
-                backgroundColor: colors.base,
+                backgroundColor: 'transparent',
                 height: '5vh',
                 width: '98%',
                 fontWeight: '900',
@@ -63,7 +66,6 @@
 
         const MenuContent = ({ book_title, genre }) => {
             const styles = {
-                backgroundColor: colors.base,
                 fontFamily: 'Baskerville',
                 listStyle: 'none',
                 fontSize: '12px',
@@ -87,12 +89,15 @@
         const Post = ({ id, book_title, author, genre, sinopsis, comments }) => {
             const styles = {
                 listStyleType: 'none',
-                backgroundColor: colors.base,
+                backgroundColor: colors.redish,
                 padding: '10px',
                 boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
                 marginBottom: '20px',
                 borderRadius: '5px',
                 textAlign: 'justify',
+            }
+            if (id % 2 !== 0) {
+                styles.backgroundColor = colors.blueish;
             }
             return (
                 <li style={styles}>
@@ -124,7 +129,8 @@
 
             const MenuStyles = {
                 width: '25vw',
-                backgroundColor: colors.base,
+                height: '70vh',
+                backgroundColor: colors.beige,
                 padding: '10px',
                 textAlign: 'center',
             }
@@ -181,8 +187,8 @@
             //WAITING LOGIC
             if (posts.length === 0) {
                 const Imagestyles = {
-                    height: '70vh',
-                    width: '70vw',
+                    height: '432px',
+                    width: '768px',
                     borderRadius: '10px',
                     padding: '10px',
                 }
