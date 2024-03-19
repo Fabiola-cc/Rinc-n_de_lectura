@@ -16,7 +16,8 @@
             dark: '#32191D',
             beige: '#D8BA9E',
             redish: '#6E262E',
-            blueish: '#505764'
+            blueish: '#505764',
+            brown: '#7D392D'
         }
 
         const Header = () => {
@@ -95,9 +96,10 @@
                 marginBottom: '20px',
                 borderRadius: '5px',
                 textAlign: 'justify',
+                color: '#F2F3F5'
             }
             if (id % 2 !== 0) {
-                styles.backgroundColor = colors.blueish;
+                styles.backgroundColor = colors.blueish
             }
             return (
                 <li style={styles}>
@@ -133,6 +135,7 @@
                 backgroundColor: colors.beige,
                 padding: '10px',
                 textAlign: 'center',
+                color: colors.brown,
             }
 
             const OnlyPostStyles = {
